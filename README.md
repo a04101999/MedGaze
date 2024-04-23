@@ -44,11 +44,11 @@ https://drive.google.com/file/d/1hdiBszZHc04HazbuNZlh90DyrsvQO9of/view?usp=shari
 
 Train file used in paper 
 
-
+https://drive.google.com/file/d/1VXFEPXKAEw-eFdeXumeIwl_xcWOv0Xi9/view?usp=sharing
 
 Test file used in paper 
 
-
+https://drive.google.com/file/d/10ah8HmFi2XSr0RRxTjXeKo5Bb7hmA78r/view?usp=sharing
 
 ## REFLACX
 
@@ -58,9 +58,11 @@ https://drive.google.com/file/d/1CBQ3YZ7tm3yKYuMXEIStdaL-m-qsiNa8/view?usp=shari
 
 Train file used in paper 
 
-
+https://drive.google.com/file/d/10M_6P9VUK8lC727vBctBJqQgriroWvpl/view?usp=sharing
 
 Test file used in paper
+
+
 
 ## EGD-CXR+ REFLACX
 
@@ -72,9 +74,13 @@ https://drive.google.com/file/d/1Ls5zzLCRjDBJJP4JSoxtElHoy7bDQZVA/view?usp=shari
 
 Train file used in paper 
 
+https://drive.google.com/file/d/1NcCoYtKYfIN8Re4Ez5396AfTRB7nB3tB/view?usp=sharing
+
 
 
 Test file used in paper
+
+https://drive.google.com/file/d/1Hnf_671_suI6_fL1dOCS7A5mlXBm3Coe/view?usp=sharing
 
 
 
