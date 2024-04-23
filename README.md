@@ -86,11 +86,11 @@ https://drive.google.com/file/d/1Hnf_671_suI6_fL1dOCS7A5mlXBm3Coe/view?usp=shari
 
 Please update the medgaze_training.py file for the desired arguments as below:
 
-training file 
+training file  path
 
-testing  file
+testing  file path
 
-image features [Resnet50]
+image features [Resnet50] path
 
 Model directory to save results 
 
