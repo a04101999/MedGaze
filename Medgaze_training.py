@@ -17,29 +17,17 @@ import random
 import torch
 import argparse
 from os.path import join
+from torch import nn, Tensor
+from torch.utils.data import Dataset
+from torch.nn.utils.rnn import pad_sequence
+import torch
+from os.path import join
+import numpy as np
 
 
 
-torch.autograd.set_detect_anomaly(True)
-def seed_everything(seed):
-    random.seed(seed)
-    os.environ['PYTHONHASHSEED'] = str(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    torch.backends.cudnn.benchmark = False
-    torch.backends.cudnn.deterministic = True
-    
 
-def fixations2seq(fixations,  max_len):
-    processed_fixs = []
-    for fix in fixations:
-        processed_fixs.append({'tgt_seq_y': torch.tensor(np.array(fix['Y'])[:max_len]), 'tgt_seq_x': torch.tensor(np.array(fix['X'])[:max_len]), 'tgt_seq_t': torch.tensor(np.array(fix['T'])[:max_len]),
-        'task': fix['task'], 'img_name':fix['name']}) 
-    return processed_fixs
-
-    
+# Important arguments to be set before running 
 
 args={ 
     'head_lr':1e-6,
@@ -73,6 +61,31 @@ args={
        
    }
 
+
+
+
+torch.autograd.set_detect_anomaly(True)
+def seed_everything(seed):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
+    
+
+def fixations2seq(fixations,  max_len):
+    processed_fixs = []
+    for fix in fixations:
+        processed_fixs.append({'tgt_seq_y': torch.tensor(np.array(fix['Y'])[:max_len]), 'tgt_seq_x': torch.tensor(np.array(fix['X'])[:max_len]), 'tgt_seq_t': torch.tensor(np.array(fix['T'])[:max_len]),
+        'task': fix['task'], 'img_name':fix['name']}) 
+    return processed_fixs
+
+    
+
+
 def save_model_train(epoch, args, model, SlowOpt, MidOpt, FastOpt, model_dir, model_name):
     state = {
         "epoch": epoch,
@@ -94,13 +107,7 @@ def save_model_train(epoch, args, model, SlowOpt, MidOpt, FastOpt, model_dir, mo
 
 # In[3]:
 
-
-from torch import nn, Tensor
-from torch.utils.data import Dataset
-from torch.nn.utils.rnn import pad_sequence
-import torch
-from os.path import join
-import numpy as np
+# Dataset and Dataloaders  
 
 
 class fixation_dataset(Dataset):
@@ -181,6 +188,8 @@ PRETRAINED_MODEL_CONFIG_DICT = {
 
 # In[6]:
 
+# Creating the reports 
+
 
 x=np.load(open( '/embeddings_text_egd_ref.npy', mode='rb'), allow_pickle = True)
 
@@ -216,6 +225,8 @@ for i in x.item().items():
 
 # In[8]:
 
+# MedGaze model 
+
 
 import torch
 import torch.nn.functional as F
@@ -225,7 +236,7 @@ from torch import nn, Tensor
 
 class medgaze(nn.Module):
     def __init__(self, transformer, spatial_dim, dropout=0.4, max_len = 7, patch_size  = 16, device = "cuda:0"):
-        super(gazeformer, self).__init__()
+        super(medgaze, self).__init__()
         self.spatial_dim = spatial_dim
         self.transformer = transformer.to(device)
         self.hidden_dim = transformer.d_model
@@ -371,38 +382,7 @@ class FixationEmbeddingLearned2d(nn.Module):
 # In[10]:
 
 
-from torchvision.models.detection import maskrcnn_resnet50_fpn
-import torchvision.transforms as T
-import copy
-from typing import Optional
 
-import torch
-import torch.nn.functional as F
-from torch import nn, Tensor
-
-#ResNet-50 backbone
-class ResNetCOCO(nn.Module):
-    def __init__(self, device = "cuda:0"):
-        super(ResNetCOCO, self).__init__()
-        self.resnet = maskrcnn_resnet50_fpn(pretrained=True).backbone.body.to(device)
-        self.device = device
-        
-    def forward(self, x: torch.Tensor)-> torch.Tensor:
-        x = x.to(self.device)
-        x = self.resnet.conv1(x)
-        x = self.resnet.bn1(x)
-        x = self.resnet.relu(x)
-        x = self.resnet.maxpool(x)
-
-        x = self.resnet.layer1(x)
-        x = self.resnet.layer2(x)
-        x = self.resnet.layer3(x)
-        x = self.resnet.layer4(x)
-        
-        bs, ch, _, _ = x.size()
-        x = x.view(bs, ch, -1).permute(0, 2, 1)
-
-        return x
 
 
 class Transformer(nn.Module):
@@ -2436,7 +2416,7 @@ def main(args):
         outfile.close()
 
 
-    model_name = 'gazeformer_'+str(args.num_encoder)+'E_'+str(args.num_decoder)+'D_'+str(args.batch_size)+'_'+str(args.hidden_dim)+'d'
+    model_name = 'medgaze_'+str(args.num_encoder)+'E_'+str(args.num_decoder)+'D_'+str(args.batch_size)+'_'+str(args.hidden_dim)+'d'
     dataset_root = args.dataset_dir
     train_file = args.train_file
     valid_file = args.valid_file
@@ -2466,7 +2446,7 @@ def main(args):
     num_decoder_layers=args.num_decoder, encoder_dropout = args.encoder_dropout, decoder_dropout = args.decoder_dropout, dim_feedforward = args.hidden_dim, 
     img_hidden_dim = args.img_hidden_dim, lm_dmodel = args.lm_hidden_dim, device = device).to(device)
 
-    model = gazeformer(transformer, spatial_dim = (args.im_h, args.im_w), dropout=args.cls_dropout, max_len = args.max_len, device = device).to(device)
+    model = medgaze(transformer, spatial_dim = (args.im_h, args.im_w), dropout=args.cls_dropout, max_len = args.max_len, device = device).to(device)
 
     loss_fn_token = torch.nn.NLLLoss()
     loss_fn_y = nn.L1Loss(reduction='none')
@@ -2484,7 +2464,7 @@ def main(args):
     start_epoch = 1
     retraining=0
     if retraining:
-        checkpoint = torch.load('/medgaze_qformer_llm_using_rest_feaex_8x8.py_128_128/train_27-02-2024-23-11-14/gazeformer_6E_6D_128_1408d_85.pkg', map_location=device)
+        checkpoint = torch.load('/medgaze_qformer_llm_using_rest_feaex_8x8.py_128_128/train_27-02-2024-23-11-14/medgaze_6E_6D_128_1408d_85.pkg', map_location=device)
         model.load_state_dict(checkpoint['model'])
         #SlowOpt.load_state_dict(checkpoint['optim_slow'])
         #MidOpt.load_state_dict(checkpoint['optim_mid'])
