@@ -27,6 +27,15 @@ https://docs.google.com/presentation/d/17J15kJNDdGW86irYHKfh_GdRJaaIJ4G5EcJky8Ir
 
 # Data links
 
+
+## ResNet50 CXR Image features link ( EGD-CXR + REFLACX )
+
+https://drive.google.com/drive/folders/1YZCgSziKLH-4-as9wIZExzDLjDJ6My8D?usp=sharing
+
+
+
+# Radiology Reports and processed Eye Gaze Data 
+
 ## EGD-CXR
 
 https://drive.google.com/file/d/1hdiBszZHc04HazbuNZlh90DyrsvQO9of/view?usp=sharing
