@@ -25,6 +25,14 @@ https://docs.google.com/presentation/d/17J15kJNDdGW86irYHKfh_GdRJaaIJ4G5EcJky8Ir
 
 ## EGD-CXR + REFLACX 
 
+# Data links
+
+## EGD-CXR
+
+## REFLACX
+
+## EGD-CXR+ REFLACX
+
 
 
 
