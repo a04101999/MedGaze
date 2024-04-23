@@ -17,7 +17,138 @@ from torch.utils.data import DataLoader
 import warnings
 warnings.filterwarnings("ignore")
 
+args={ 
+    'head_lr':1e-6,
+    'tail_lr':1e-4, 
+    'belly_lr':2e-6, 
+    'dataset_dir': "/dataset",
+    'train_file':'train_ref_128_dur.json',   # Train file name 
+    'valid_file':'val_ref_128_dur.json',     #test file name 
+    'img_ftrs_dir': "/image_features_text_qformer_llm_exp_128_full_eg_reflacx/",  # Download the image features from the link provided
+    'im_h':8, 
+    'im_w':8,
+    'patch_size':16,
+    'seed':42, 
+    'batch_size':32, 
+    'epochs':1000, 
+    'max_len':50, 
+    'num_encoder':6, 
+    'num_decoder':6, 
+    'hidden_dim':1408, 
+    'nhead':8, 
+    'img_hidden_dim':2048, 
+    'lm_hidden_dim':768,
+    'encoder_dropout':0.1, 
+    'decoder_dropout':0.2, 
+    'cls_dropout':0.4, 
+    'retraining':False, 
 
+    'model_root':'/medgaze_qformer_llm_using_rest_feaex_8x8.py_128_128/',    # directory to save the model
+    'cuda':3, 
+    'num_workers':6
+       
+   }
+
+PRETRAINED_MODEL_CONFIG_DICT = {
+        "pretrain_opt2.7b": "configs/models/blip2/blip2_pretrain_opt2.7b.yaml",
+        "pretrain_opt6.7b": "configs/models/blip2/blip2_pretrain_opt6.7b.yaml",
+        "caption_coco_opt2.7b": "configs/models/blip2/blip2_caption_opt2.7b.yaml",
+        "caption_coco_opt6.7b": "configs/models/blip2/blip2_caption_opt6.7b.yaml",
+    }
+
+
+# In[5]:
+
+
+
+
+
+# In[6]:
+
+# Creating the reports 
+
+
+x=np.load(open( '/embeddings_text_egd_ref.npy', mode='rb'), allow_pickle = True)
+
+
+# In[7]:
+
+
+
+
+
+uy=[]
+
+import json
+         
+path='/full_egd_ref_128_dur.json'
+
+
+def js_r(filename: str):
+    with open(filename) as f_in:
+        return json.load(f_in)
+    
+fulld=js_r(path)
+new_dict = {item['name']:item for item in fulld}   
+#tasks=[]
+for i in x.item().items():
+           #print(i[0])
+    
+           x.item()[i[0]]=new_dict[i[0]+'.jpg']['task']
+
+
+
+
+
+# In[8]:
+
+# MedGaze model 
+
+
+import torch
+import torch.nn.functional as F
+from torch import nn, Tensor
+
+
+torch.autograd.set_detect_anomaly(True)
+def seed_everything(seed):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
+    
+
+def fixations2seq(fixations,  max_len):
+    processed_fixs = []
+    for fix in fixations:
+        processed_fixs.append({'tgt_seq_y': torch.tensor(np.array(fix['Y'])[:max_len]), 'tgt_seq_x': torch.tensor(np.array(fix['X'])[:max_len]), 'tgt_seq_t': torch.tensor(np.array(fix['T'])[:max_len]),
+        'task': fix['task'], 'img_name':fix['name']}) 
+    return processed_fixs
+
+    
+
+
+def save_model_train(epoch, args, model, SlowOpt, MidOpt, FastOpt, model_dir, model_name):
+    state = {
+        "epoch": epoch,
+        "args": str(args),
+        "model":
+        model.module.state_dict()
+        if hasattr(model, "module") else model.state_dict(),
+        "optim_slow":
+        SlowOpt.state_dict(),
+        "optim_mid":
+        MidOpt.state_dict(),
+        "optim_fast":
+        FastOpt.state_dict(),    
+    }
+    torch.save(state, join(model_dir, model_name+'_'+str(epoch)+'.pkg'))
+    
+    
 
 
 torch.autograd.set_detect_anomaly(True)
