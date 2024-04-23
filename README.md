@@ -38,15 +38,43 @@ https://drive.google.com/drive/folders/1YZCgSziKLH-4-as9wIZExzDLjDJ6My8D?usp=sha
 
 ## EGD-CXR
 
+Full dataset [train +test]
+
 https://drive.google.com/file/d/1hdiBszZHc04HazbuNZlh90DyrsvQO9of/view?usp=sharing
+
+Train file used in paper 
+
+
+
+Test file used in paper 
+
+
 
 ## REFLACX
 
+Full dataset [train +test]
+
 https://drive.google.com/file/d/1CBQ3YZ7tm3yKYuMXEIStdaL-m-qsiNa8/view?usp=sharing
+
+Train file used in paper 
+
+
+
+Test file used in paper
 
 ## EGD-CXR+ REFLACX
 
+
+Full dataset [train +test]
+
 https://drive.google.com/file/d/1Ls5zzLCRjDBJJP4JSoxtElHoy7bDQZVA/view?usp=sharing
+
+
+Train file used in paper 
+
+
+
+Test file used in paper
 
 
 
