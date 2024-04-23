@@ -62,7 +62,7 @@ https://drive.google.com/file/d/10M_6P9VUK8lC727vBctBJqQgriroWvpl/view?usp=shari
 
 Test file used in paper
 
-
+https://drive.google.com/file/d/1CvM0ME6gEy6APP20YEGvtTsxgViL5Khw/view?usp=sharing
 
 ## EGD-CXR+ REFLACX
 
