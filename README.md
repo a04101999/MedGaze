@@ -17,15 +17,7 @@ Presentation slide for the Results corresponding to each video uploaded in the a
 https://docs.google.com/presentation/d/17J15kJNDdGW86irYHKfh_GdRJaaIJ4G5EcJky8IrzHM/edit?usp=sharing
 
 
-# MedGaze Pre-trained model 
-
-## EGD-CXR 
-
-## REFLACX
-
-## EGD-CXR + REFLACX 
-
-# Data links
+# Data links for Training and test MedGaze
 
 
 ## ResNet50 CXR Image features link ( EGD-CXR + REFLACX )
@@ -82,7 +74,23 @@ Test file used in paper
 
 https://drive.google.com/file/d/1Hnf_671_suI6_fL1dOCS7A5mlXBm3Coe/view?usp=sharing
 
+# MedGaze Pre-trained model 
 
+## EGD-CXR 
+
+## REFLACX
+
+## EGD-CXR + REFLACX 
+
+# Training MedGaze 
+
+
+# Testing MedGaze on the dataset 
+
+
+All the results corresponding to each dataset can be reproduced using the notebook provided 
+
+Notebook_miccai.ipynb
 
 
 
