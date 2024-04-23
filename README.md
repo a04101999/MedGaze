@@ -29,9 +29,15 @@ https://docs.google.com/presentation/d/17J15kJNDdGW86irYHKfh_GdRJaaIJ4G5EcJky8Ir
 
 ## EGD-CXR
 
+https://drive.google.com/file/d/1hdiBszZHc04HazbuNZlh90DyrsvQO9of/view?usp=sharing
+
 ## REFLACX
 
+https://drive.google.com/file/d/1CBQ3YZ7tm3yKYuMXEIStdaL-m-qsiNa8/view?usp=sharing
+
 ## EGD-CXR+ REFLACX
+
+https://drive.google.com/file/d/1Ls5zzLCRjDBJJP4JSoxtElHoy7bDQZVA/view?usp=sharing
 
 
 
