@@ -1,14 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
 
 
-import os
-os.chdir('/Medgaze')
-
-
-# In[2]:
 
 
 import numpy as np
@@ -27,16 +21,16 @@ import numpy as np
 
 
 
-# Important arguments to be set before running 
+# Important arguments to be set before training the MedGaze
 
 args={ 
     'head_lr':1e-6,
     'tail_lr':1e-4, 
     'belly_lr':2e-6, 
     'dataset_dir': "/dataset",
-    'train_file':'train_ref_128_dur.json',
-    'valid_file':'val_ref_128_dur.json', 
-    'img_ftrs_dir': "/image_features_text_qformer_llm_exp_128_full_eg_reflacx/",
+    'train_file':'train_ref_128_dur.json',   # Train file name 
+    'valid_file':'val_ref_128_dur.json',     #test file name 
+    'img_ftrs_dir': "/image_features_text_qformer_llm_exp_128_full_eg_reflacx/",  # Download the image features from the link provided
     'im_h':8, 
     'im_w':8,
     'patch_size':16,
@@ -55,7 +49,7 @@ args={
     'cls_dropout':0.4, 
     'retraining':False, 
 
-    'model_root':'/medgaze_qformer_llm_using_rest_feaex_8x8.py_128_128/',
+    'model_root':'/medgaze_qformer_llm_using_rest_feaex_8x8.py_128_128/',    # directory to save the model
     'cuda':3, 
     'num_workers':6
        
@@ -199,7 +193,7 @@ x=np.load(open( '/embeddings_text_egd_ref.npy', mode='rb'), allow_pickle = True)
 
 
 
-path2='/Eye_Gaze_Research_Data_Set/egd-cxr/1.0.0/audio_segmentation_transcripts/'
+
 uy=[]
 
 import json
@@ -2232,9 +2226,7 @@ class OPTForCausalLM(OPTPreTrainedModel):
         
 
         loss = None
-        #print('i am good boy')
-        #print(outputs[0].shape)
-        #print(outputs[0])
+       
 
         return CausalLMOutputWithPast(
             loss=loss,
@@ -2398,11 +2390,11 @@ def main(args):
     if retraining:
         model_dir = '/'.join(args.last_checkpoint.split('/')[:-1])
         #args = args
-        logfile = 'full128_gazefromer_qformer_llm_using_rest_feaex_8x8_128_128_' +'retraining' +'.txt'
+        logfile = 'full128_medgaze_qformer_llm_using_rest_feaex_8x8_128_128_' +'retraining' +'.txt'
         args.cuda = device_id
     else:
         timenow = datetime.now().strftime("%d-%m-%Y-%H-%M-%S") 
-        logfile = 'full128_gazefromer_qformer_llm_using_rest_feaex_8x8_128_128_' + timenow + '.txt'
+        logfile = 'full128_medgaze_qformer_llm_using_rest_feaex_8x8_128_128_' + timenow + '.txt'
         model_dir = join(args.model_root, 'train_full' + timenow)
         os.mkdir(model_dir)
         
@@ -2492,19 +2484,6 @@ args=pd.Series(args)
 main(args)
 
 
-# In[ ]:
-
-
-64*2
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
