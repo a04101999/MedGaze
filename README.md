@@ -17,7 +17,7 @@ Presentation slide for the Results corresponding to each video uploaded in the a
 https://docs.google.com/presentation/d/17J15kJNDdGW86irYHKfh_GdRJaaIJ4G5EcJky8IrzHM/edit?usp=sharing
 
 
-# Data links for Training and test MedGaze
+# Data links for Training and Testing MedGaze
 
 
 ## ResNet50 CXR Image features link ( EGD-CXR + REFLACX )
