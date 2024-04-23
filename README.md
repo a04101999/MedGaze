@@ -98,7 +98,7 @@ To start the training of medgaze run
 
 ```
 
-python MedGaze_training.py
+python Medgaze_training.py
 
 ```
 
