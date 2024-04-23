@@ -84,6 +84,19 @@ https://drive.google.com/file/d/1Hnf_671_suI6_fL1dOCS7A5mlXBm3Coe/view?usp=shari
 
 # Training MedGaze 
 
+Please update the medgaze_training.py file for the desired arguments as below:
+
+training file 
+
+testing  file
+
+image features [Resnet50]
+
+Model directory to save results 
+
+
+
+
 
 # Testing MedGaze on the dataset 
 
