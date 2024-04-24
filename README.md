@@ -78,6 +78,8 @@ https://drive.google.com/file/d/1Hnf_671_suI6_fL1dOCS7A5mlXBm3Coe/view?usp=shari
 
 ## EGD-CXR 
 
+https://drive.google.com/file/d/1cXa-LF97RWGHzB2yBPq8-W_m3FTQEkZy/view?usp=sharing
+
 ## REFLACX
 
 ## EGD-CXR + REFLACX 
