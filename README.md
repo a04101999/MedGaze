@@ -26,7 +26,7 @@ https://drive.google.com/drive/folders/1YZCgSziKLH-4-as9wIZExzDLjDJ6My8D?usp=sha
 
 
 
-# Radiology Reports and processed Eye Gaze Data 
+# Radiology Reports and processed Eye Gaze Data ( Resize accordingly based on image size- This is a raw data )
 
 ## EGD-CXR
 
