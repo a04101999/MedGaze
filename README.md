@@ -42,6 +42,10 @@ Test file used in paper
 
 https://drive.google.com/file/d/10ah8HmFi2XSr0RRxTjXeKo5Bb7hmA78r/view?usp=sharing
 
+Test set Images:
+
+https://drive.google.com/drive/folders/1UoNMVq8Ijzy850h5KQTCb8Vrqx2I3Lyp
+
 ## REFLACX
 
 Full dataset [train +test]
